@@ -1,6 +1,6 @@
 package answers;
 
-public class Solusion_326 {
+public class Solution_326 {
     public boolean isPowerOfThree(int n) {
         if (n <= 0)
             return false;

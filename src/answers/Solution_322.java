@@ -1,6 +1,6 @@
 package answers;
 
-public class Solusion_322 {
+public class Solution_322 {
     public static void main(String[] args) {
         System.out.println(coinChange_v2(new int[]{1}, 1));
     }

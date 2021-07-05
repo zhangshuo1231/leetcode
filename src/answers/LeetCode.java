@@ -2,7 +2,7 @@ package answers;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solusion_326 solution = new Solusion_326();
-        System.out.println(solution.isPowerOfThree(0));
+        Solution_327 solution = new Solution_327();
+        System.out.println(solution.countRangeSum(new int[]{-2,5,-1}, -2, 2));
     }
 }

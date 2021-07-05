@@ -2,7 +2,7 @@ package answers;
 
 import java.util.Arrays;
 
-public class Solusion_324 {
+public class Solution_324 {
     public void wiggleSort(int[] nums) {
         int[] copy = Arrays.copyOf(nums, nums.length);
         Arrays.sort(copy);
