@@ -1,8 +1,11 @@
 package answers;
+import model.ListNode;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_327 solution = new Solution_327();
-        System.out.println(solution.countRangeSum(new int[]{-2,5,-1}, -2, 2));
+        Solution_329 solution = new Solution_329();
+        int[][] matrix = new int[][]{{3, 4, 5}, {3, 2, 6}, {2, 2, 1}};
+
+        System.out.println(solution.longestIncreasingPath(matrix));
     }
 }
