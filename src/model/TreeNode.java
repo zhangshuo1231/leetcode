@@ -29,8 +29,8 @@ public class TreeNode {
         root.right.left.left = new TreeNode(6);
         root.right.left.right = new TreeNode(7);
 
-        TreeNode res = deserialize(root.toString());
-        System.out.println(res);
+        // TreeNode res = deserialize(root.toString());
+        System.out.println(root);
     }
 
     private static void leetbfs(TreeNode root, List<Integer> res) {

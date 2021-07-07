@@ -1,26 +1,34 @@
 package answers;
 
+import java.util.*;
+
 public class Solution_329 {
-    int max = 1;
+    Integer max = 1;
     public int longestIncreasingPath(int[][] matrix) {
+        int[][] cache = new int[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                backtrack(0, new int[]{i, j}, matrix);
+                int len = maxDistance(i, j, matrix, cache);
+                max = Math.max(max, len);
             }
         }
         return max;
     }
 
-    private void backtrack(int currNumSteps, int[] currLocation, int[][] matrix) {
-        if (currLocation == null) {
-            max = Math.max(max, currNumSteps);
-            return;
-        }
+    // DP 最好是跟递归一起使用，而不是跟 backtracking
+    private int maxDistance(int i, int j, int[][] matrix, int[][] cache) {
+        if (cache[i][j] != 0) return cache[i][j];
+        int max = 1;
         for (int direction = 0; direction <= 3; direction++) {
-            currNumSteps++;
-            backtrack(currNumSteps, nextCell(matrix, currLocation, direction), matrix);
-            currNumSteps--;
+            int[] next = nextCell(matrix, new int[]{i, j}, direction);
+            if (next == null) {
+                continue;
+            }
+            int len = 1 + maxDistance(next[0], next[1], matrix, cache);
+            max = Math.max(max, len);
         }
+        cache[i][j] = max;
+        return max;
     }
 
     private int[] nextCell(int[][] matrix, int[] curr, int direction) {

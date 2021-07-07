@@ -21,9 +21,9 @@ public class NQueen {
 
     // 判断
     // for 各种选择
-    // 前进一步
-    // backtrack
-    // 后退一步
+        // 前进一步
+        // backtrack
+        // 后退一步
     private static void backtrack(List<List<Integer>> list, List<Integer> temp, int n) {
         if (!isLastPosValid(temp)) {
             return;
