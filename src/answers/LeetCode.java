@@ -1,9 +1,12 @@
 package answers;
 import model.ListNode;
+import model.TreeNode;
+
+import java.util.*;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_330 solution = new Solution_330();
-        System.out.println(solution.minPatches(new int[]{13, 43}, 100));
+        Solution_357 solution = new Solution_357();
+        System.out.println(solution.countNumbersWithUniqueDigits(2));
     }
 }

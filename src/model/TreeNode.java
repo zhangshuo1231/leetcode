@@ -20,7 +20,6 @@ public class TreeNode {
     }
 
     public static void main(String[] args) {
-
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(3);
@@ -28,9 +27,20 @@ public class TreeNode {
         root.right.right = new TreeNode(5);
         root.right.left.left = new TreeNode(6);
         root.right.left.right = new TreeNode(7);
-
-        // TreeNode res = deserialize(root.toString());
+        System.out.println(root.toString());
+        TreeNode res = deserialize(root.toString());
         System.out.println(root);
+        // preOrder(root);
+    }
+
+    private static void preOrder(TreeNode root) {
+        if (root == null)
+            return;
+        else {
+            System.out.println(root.val);
+            preOrder(root.left);
+            preOrder(root.right);
+        }
     }
 
     private static void leetbfs(TreeNode root, List<Integer> res) {
@@ -48,7 +58,7 @@ public class TreeNode {
         }
     }
 
-    private static TreeNode deserialize(String data) {
+    public static TreeNode deserialize(String data) {
         if (data == null || data.isEmpty()) return null;
         List<String> list = Arrays.asList(data.substring(1, data.length() - 1).split(","));
         Queue<TreeNode> queue = new LinkedList<>();
