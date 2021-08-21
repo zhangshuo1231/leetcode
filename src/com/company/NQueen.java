@@ -19,11 +19,6 @@ public class NQueen {
         return result;
     }
 
-    // 判断
-    // for 各种选择
-        // 前进一步
-        // backtrack
-        // 后退一步
     private static void backtrack(List<List<Integer>> list, List<Integer> temp, int n) {
         if (!isLastPosValid(temp)) {
             return;
@@ -44,11 +39,12 @@ public class NQueen {
     private static boolean isLastPosValid(List<Integer> temp) {
         if (temp.size() == 0)
             return true;
-        int lastColumnIndex = temp.get(temp.size() - 1);
-        int diagonal =  temp.size() - 1 - temp.get(temp.size() - 1);
-        int diagonal_rev = temp.size() - 1 + temp.get(temp.size() - 1);
+        int currRow = temp.size() - 1;
+        int currColumn = temp.get(temp.size() - 1);
+        int diagonal =  currRow - currColumn;
+        int diagonal_rev = currRow + currColumn;
         for (int i = 0; i < temp.size() - 1; i++) {
-            if (temp.get(i) == lastColumnIndex) {
+            if (temp.get(i) == currColumn) {
                 return false;
             }
             else if (i - temp.get(i) == diagonal) {

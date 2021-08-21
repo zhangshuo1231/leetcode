@@ -6,8 +6,10 @@ import java.util.*;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_7 solution = new Solution_7();
-        System.out.println(solution.reverse(1534236469));
+        Solution_48 solution = new Solution_48();
+        int[][] nums = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        solution.rotate(nums);
+        System.out.println(Arrays.deepToString(nums));
     }
 
     private static void printBit(int number) {
