@@ -6,10 +6,11 @@ import java.util.*;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_48 solution = new Solution_48();
-        int[][] nums = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        solution.rotate(nums);
-        System.out.println(Arrays.deepToString(nums));
+        Solution_126 solution = new Solution_126();
+        String beginWord = "hit";
+        String endWord = "cog";
+        List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
+        System.out.println(solution.findLadders(beginWord, endWord, wordList));
     }
 
     private static void printBit(int number) {
