@@ -1,16 +1,13 @@
 package answers;
+import com.sun.source.tree.Tree;
 import model.ListNode;
 import model.TreeNode;
-
 import java.util.*;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_126 solution = new Solution_126();
-        String beginWord = "hit";
-        String endWord = "cog";
-        List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
-        System.out.println(solution.findLadders(beginWord, endWord, wordList));
+        Solution_1326 solution = new Solution_1326();
+        System.out.println(solution.minTaps(7, new int[]{1, 2, 1, 0, 2, 1, 0, 1}));
     }
 
     private static void printBit(int number) {

@@ -13,11 +13,12 @@ public class Solution_363 {
         for(int i = 0; i < numRow; i++){
             int[] array = new int[numCol];
             for (int j = i; j >= 0; j--){
+
                 int val = 0;
                 TreeSet<Integer> set = new TreeSet<>();
                 set.add(0);
-                for(int count = 0; count < numCol; count++){
-                    array[count] = array[count] + matrix[j][count];
+                for (int count = 0; count < numCol; count++){
+                    array[count] += matrix[j][count];
                     val += array[count];
                     Integer subres = set.ceiling(val - k);
                     if (null != subres){
@@ -25,6 +26,7 @@ public class Solution_363 {
                     }
                     set.add(val);
                 }
+
             }
         }
         return res;

@@ -3,31 +3,31 @@ package com.company;
 import java.util.Arrays;
 
 public class BinarySearch {
-    public int[] binarySearch(int array[], int left, int right, int target) {
+    public int binarySearch(int array[], int left, int right, int target) {
         while(left <= right) {
             int mid = left + (right - left) / 2;
             if (array[mid] == target) {
-                return new int[]{mid, mid};
+                return mid;
             }
             else {
                 if (array[mid] > target) {
-                    return binarySearch(array, left, mid - 1, target);
+                    right = mid - 1;
                 }
                 else {
-                    return binarySearch(array, mid + 1, right, target);
+                    left = mid + 1;
                 }
             }
         }
-        return new int[]{right, left};
+        return -1;
     }
 
     public static void main(String args[])
     {
         BinarySearch ob = new BinarySearch();
-        int arr[] = {1, 2};
+        int arr[] = {1, 2, 3, 5, 7, 8, 9};
         int n = arr.length;
-        int x = 3;
-        int result[] = ob.binarySearch(arr, 0, n - 1, x);
-        System.out.println(Arrays.toString(result));
+        int x = 4;
+        int result = ob.binarySearch(arr, 0, n - 1, x);
+        System.out.println(result);
     }
 }

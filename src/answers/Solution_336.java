@@ -6,81 +6,74 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Solution_336 {
+    class TrieNode {
+        TrieNode[] children = new TrieNode[26];
+        int wordIndex = -1;
+        List<Integer> restIsPalindrome;
+        TrieNode() {
+            restIsPalindrome = new ArrayList<>();
+        }
+    }
+
+    TrieNode root = new TrieNode();
+    int n;
+    List<List<Integer>> res = new ArrayList<>();
+
     public List<List<Integer>> palindromePairs(String[] words) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        if(words == null || words.length == 0){
-            return res;
+        n = words.length;
+        for (int i = 0; i < n; i++) {
+            add(words[i], i);
         }
-        //build the map save the key-val pairs: String - idx
-        HashMap<String, Integer> map = new HashMap<>();
-        for(int i = 0; i < words.length; i++){
-            map.put(words[i], i);
+        for (int i = 0; i < n; i++) {
+            search(words[i], i);
         }
-
-        //special cases: "" can be combine with any palindrome string
-        if(map.containsKey("")){
-            int blankIdx = map.get("");
-            for(int i = 0; i < words.length; i++){
-                if(isPalindrome(words[i])){
-                    if(i == blankIdx) continue;
-                    res.add(Arrays.asList(blankIdx, i));
-                    res.add(Arrays.asList(i, blankIdx));
-                }
-            }
-        }
-
-        //find all string and reverse string pairs
-        for(int i = 0; i < words.length; i++){
-            String cur_r = reverseStr(words[i]);
-            if(map.containsKey(cur_r)){
-                int found = map.get(cur_r);
-                if(found == i) continue;
-                res.add(Arrays.asList(i, found));
-            }
-        }
-
-        //find the pair s1, s2 that
-        //case1 : s1[0:cut] is palindrome and s1[cut+1:] = reverse(s2) => (s2, s1)
-        //case2 : s1[cut+1:] is palindrome and s1[0:cut] = reverse(s2) => (s1, s2)
-        for(int i = 0; i < words.length; i++){
-            String cur = words[i];
-            for(int cut = 1; cut < cur.length(); cut++){
-                if(isPalindrome(cur.substring(0, cut))){
-                    String cut_r = reverseStr(cur.substring(cut));
-                    if(map.containsKey(cut_r)){
-                        int found = map.get(cut_r);
-                        if(found == i) continue;
-                        res.add(Arrays.asList(found, i));
-                    }
-                }
-                if(isPalindrome(cur.substring(cut))){
-                    String cut_r = reverseStr(cur.substring(0, cut));
-                    if(map.containsKey(cut_r)){
-                        int found = map.get(cut_r);
-                        if(found == i) continue;
-                        res.add(Arrays.asList(i, found));
-                    }
-                }
-            }
-        }
-
         return res;
     }
 
-    public String reverseStr(String str){
-        StringBuilder sb= new StringBuilder(str);
-        return sb.reverse().toString();
+    private void add(String word, int wordIndex) {
+        TrieNode cur = root;
+        char[] chs = word.toCharArray();
+        for (int i = chs.length - 1; i >= 0; i--) {
+            int j = chs[i] - 'a';
+            if (isPalindrome(chs, 0, i)) {
+                cur.restIsPalindrome.add(wordIndex);
+            }
+
+            if (cur.children[j] == null) {
+                cur.children[j] = new TrieNode();
+            }
+            cur = cur.children[j];
+        }
+        cur.wordIndex = wordIndex;
     }
 
-    public boolean isPalindrome(String s){
-        int i = 0;
-        int j = s.length() - 1;
-        while(i <= j){
-            if(s.charAt(i) != s.charAt(j)){
-                return false;
+    private void search(String word, int wordIndex) {
+        TrieNode cur = root;
+        char[] chs = word.toCharArray();
+        for (int i = 0; i < chs.length; i++) {
+            int j = chs[i] - 'a';
+            if (cur.wordIndex != -1 && isPalindrome(chs, i, chs.length - 1)) {
+                res.add(Arrays.asList(wordIndex, cur.wordIndex));
             }
-            i++;
-            j--;
+            if (cur.children[j] == null) {
+                return;
+            }
+            cur = cur.children[j];
+        }
+
+        // aaaa
+        if (cur.wordIndex != -1 && cur.wordIndex != wordIndex) {
+            res.add(Arrays.asList(wordIndex, cur.wordIndex));
+        }
+
+        for (int j : cur.restIsPalindrome) {
+            res.add(Arrays.asList(wordIndex, j));
+        }
+    }
+
+    private boolean isPalindrome(char[] chs, int i, int j) {
+        while (i < j) {
+            if (chs[i++] != chs[j--]) return false;
         }
         return true;
     }

@@ -2,8 +2,9 @@ package answers;
 
 public class Solution_344 {
     public void reverseString(char[] s) {
-        for (int i = 0, j = s.length - 1; i < j; i++, j--) {
-            swap(s, i, j);
+        int i = 0, j = s.length - 1;
+        while (i < j) {
+            swap(s, i++, j--);
         }
     }
 

@@ -4,6 +4,9 @@ import java.util.*;
 
 public class Solution_329 {
     Integer max = 1;
+    private int[] rows = new int[]{0, 0, -1, 1};
+    private int[] cols = new int[]{-1, 1, 0, 0};
+
     public int longestIncreasingPath(int[][] matrix) {
         int[][] cache = new int[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
@@ -17,7 +20,9 @@ public class Solution_329 {
 
     // DP 最好是跟递归一起使用，而不是跟 backtracking
     private int maxDistance(int i, int j, int[][] matrix, int[][] cache) {
-        if (cache[i][j] != 0) return cache[i][j];
+        if (cache[i][j] != 0) {
+            return cache[i][j];
+        }
         int max = 1;
         for (int direction = 0; direction <= 3; direction++) {
             int[] next = nextCell(matrix, new int[]{i, j}, direction);
@@ -32,52 +37,14 @@ public class Solution_329 {
     }
 
     private int[] nextCell(int[][] matrix, int[] curr, int direction) {
-        int maxRowIndex = matrix.length - 1;
-        int maxColIndex = matrix[0].length - 1;
-        int currValue = matrix[curr[0]][curr[1]];
-        switch (direction) {
-            case 0:
-                if (curr[1] == 0) {
-                    return null;
-                } else {
-                    if (matrix[curr[0]][curr[1] - 1] > currValue) {
-                        return new int[]{curr[0], curr[1] - 1};
-                    } else {
-                        return null;
-                    }
-                }
-            case 1:
-                if (curr[0] == 0) {
-                    return null;
-                } else {
-                    if (matrix[curr[0] - 1][curr[1]] > currValue) {
-                        return new int[]{curr[0] - 1, curr[1]};
-                    } else {
-                        return null;
-                    }
-                }
-            case 2:
-                if (curr[1] == maxColIndex) {
-                    return null;
-                } else {
-                    if (matrix[curr[0]][curr[1] + 1] > currValue) {
-                        return new int[]{curr[0], curr[1] + 1};
-                    } else {
-                        return null;
-                    }
-                }
-            case 3:
-                if (curr[0] == maxRowIndex) {
-                    return null;
-                } else {
-                    if (matrix[curr[0] + 1][curr[1]] > currValue) {
-                        return new int[]{curr[0] + 1, curr[1]};
-                    } else {
-                        return null;
-                    }
-                }
-            default:
-                throw new RuntimeException();
-        }
+        int currVal = matrix[curr[0]][curr[1]];
+        int row = curr[0] + rows[direction];
+        int col = curr[1] + cols[direction];
+        return isValid(matrix, row, col, currVal) ? new int[]{row, col} : null;
+
+    }
+
+    private boolean isValid(int[][] matrix, int row, int col, int currVal) {
+        return row >= 0 && row < matrix.length && col >= 0 && col < matrix[0].length && matrix[row][col] > currVal;
     }
 }

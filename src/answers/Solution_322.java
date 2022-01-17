@@ -43,7 +43,7 @@ public class Solution_322 {
             int min = Integer.MAX_VALUE;
             for (int coin : coins) {
                 int departure = i - coin;
-                if (departure > 0 && steps[departure] != 0 && steps[departure] != -1) {
+                if (departure > 0 && steps[departure] > 0) {
                     min = Math.min(min, steps[departure] + 1);
                 }
             }

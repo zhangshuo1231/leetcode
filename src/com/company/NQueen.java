@@ -6,7 +6,7 @@ import java.util.List;
 public class NQueen {
 
     public static void main(String[] args) {
-        System.out.println(solveNQueens(4));
+        System.out.println(solveNQueens(8));
     }
 
     public static List<List<String>> solveNQueens(int n) {

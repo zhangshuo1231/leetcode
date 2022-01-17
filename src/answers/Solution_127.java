@@ -2,31 +2,31 @@ package answers;
 
 import java.util.*;
 
-class Solution_126 {
+class Solution_127 {
     Map<String, List<String>> graph = new HashMap<>();
     List<String> currPath = new ArrayList<>();
-    List<List<String>> shortestPaths = new ArrayList<>();
+    int min = Integer.MAX_VALUE;
 
-    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> copiedWordList = new HashSet<>(wordList);
         bfs(beginWord, copiedWordList);
         currPath.add(beginWord);
-        backtrack(beginWord, endWord);
-        return shortestPaths;
+        backtrack(beginWord, 1, endWord);
+        return min == Integer.MAX_VALUE ? 0 : min;
     }
 
-    private void backtrack(String source, String destination) {
-        if (source.equals(destination)) {
-            List<String> tempPath = new ArrayList<>(currPath);
-            shortestPaths.add(tempPath);
+    private void backtrack(String curr, int currLength, String destination) {
+        if (curr.equals(destination)) {
+            min = Math.min(min, currLength);
         }
-        if (!graph.containsKey(source)) {
+        if (!graph.containsKey(curr)) {
             return;
         }
-        for (int i = 0; i < graph.get(source).size(); i++) {
-            currPath.add(graph.get(source).get(i));
-            backtrack(graph.get(source).get(i), destination);
-            currPath.remove(currPath.size() - 1);
+        for (int i = 0; i < graph.get(curr).size(); i++) {
+            String nextStep = graph.get(curr).get(i);
+            currLength++;
+            backtrack(nextStep, currLength, destination);
+            currLength--;
         }
     }
 
@@ -47,7 +47,6 @@ class Solution_126 {
                 for (String word : neighbors) {
                     visited.add(word);
                     graph.putIfAbsent(currWord, new ArrayList<>());
-                    // add the edge from currWord to word in the list
                     graph.get(currWord).add(word);
                     if (!enqueued.contains(word)) {
                         q.add(word);

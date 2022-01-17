@@ -11,7 +11,7 @@ public class Solution_347 {
             numFreqMap.put(i, numFreqMap.get(i) + 1);
         }
         List<Map.Entry<Integer, Integer>> list = new ArrayList<>(numFreqMap.entrySet());
-        list.sort(Map.Entry.<Integer, Integer>comparingByValue().reversed());
+        list.sort(Map.Entry.<Integer, Integer> comparingByValue().reversed());
         for (int i = 0; i < k; i++) {
             res[i] = list.get(i).getKey();
         }
