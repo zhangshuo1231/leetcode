@@ -6,8 +6,9 @@ import java.util.*;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_1326 solution = new Solution_1326();
-        System.out.println(solution.minTaps(7, new int[]{1, 2, 1, 0, 2, 1, 0, 1}));
+        Solution_987 solution = new Solution_987();
+        TreeNode root = TreeNode.deserialize("[3,1,4,0,2,2]");
+        System.out.println(solution.verticalTraversal(root));
     }
 
     private static void printBit(int number) {
