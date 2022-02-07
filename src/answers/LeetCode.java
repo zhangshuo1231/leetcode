@@ -6,9 +6,8 @@ import java.util.*;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_987 solution = new Solution_987();
-        TreeNode root = TreeNode.deserialize("[3,1,4,0,2,2]");
-        System.out.println(solution.verticalTraversal(root));
+        Solution_648 solution = new Solution_648();
+        System.out.println(solution.replaceWords(Arrays.asList("cat","bat","rat"), "the cattle was rattled by the battery"));
     }
 
     private static void printBit(int number) {
