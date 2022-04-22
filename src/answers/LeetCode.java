@@ -1,13 +1,12 @@
 package answers;
-import com.sun.source.tree.Tree;
-import model.ListNode;
-import model.TreeNode;
-import java.util.*;
+import meta.LongestPath;
+import meta.MinimumDeleteParentheses;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_648 solution = new Solution_648();
-        System.out.println(solution.replaceWords(Arrays.asList("cat","bat","rat"), "the cattle was rattled by the battery"));
+        // Solution_720 solution = new Solution_720();
+        MinimumDeleteParentheses minimumDeleteParentheses = new MinimumDeleteParentheses();
+        System.out.println(minimumDeleteParentheses.deleteParen("a(jdsfs))(ad12)((()"));
     }
 
     private static void printBit(int number) {

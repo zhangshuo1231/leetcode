@@ -19,7 +19,7 @@ public class UnionFind {
         else {
             int immediateParent = find(parent[i]);
             parent[i] = immediateParent;
-            return parent[i];
+            return immediateParent;
         }
     }
 
