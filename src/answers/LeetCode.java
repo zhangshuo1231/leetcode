@@ -1,12 +1,14 @@
 package answers;
-import meta.LongestPath;
-import meta.MinimumDeleteParentheses;
+
+import amazon.LongestSquare;
+import model.TreeNode;
+
+import java.util.Arrays;
 
 public class LeetCode {
     public static void main(String[] args) {
-        // Solution_720 solution = new Solution_720();
-        MinimumDeleteParentheses minimumDeleteParentheses = new MinimumDeleteParentheses();
-        System.out.println(minimumDeleteParentheses.deleteParen("a(jdsfs))(ad12)((()"));
+        LongestSquare solution = new LongestSquare();
+        System.out.println(solution.longest(new int[]{2, 8, 9, 16, 4, 3}));
     }
 
     private static void printBit(int number) {

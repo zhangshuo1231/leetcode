@@ -5,6 +5,57 @@ import model.TreeNode;
 import java.util.*;
 
 public class Solution_987 {
+
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        TreeMap<Integer, List<int[]>> map = new TreeMap<>();
+        List<Integer> cols = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        cols.add(0);
+        int cx = 0;
+        int level = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode curr = queue.poll();
+                int col = cols.get(cx++);
+
+                List<int[]> list = map.getOrDefault(col, new ArrayList<>());
+                list.add(new int[]{level, curr.val});
+                map.put(col, list);
+
+                if (curr.left != null) {
+                    queue.offer(curr.left);
+                    cols.add(col - 1);
+                }
+                if (curr.right != null) {
+                    queue.offer(curr.right);
+                    cols.add(col + 1);
+                }
+            }
+            level++;
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        for (Map.Entry<Integer, List<int[]>> entry : map.entrySet()) {
+            List<int[]> pairs = entry.getValue();
+            Collections.sort(pairs, (a, b) -> {
+                if (a[0] != b[0]) {
+                    return a[0] - b[0];
+                }
+                else {
+                    return a[1] - b[1];
+                }
+            });
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < pairs.size(); i++) {
+                list.add(pairs.get(i)[1]);
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
+    /*
     class TreeNodeWithRow {
         TreeNode node;
         int row;
@@ -40,4 +91,5 @@ public class Solution_987 {
         dfs(node.left, row + 1, col - 1);
         dfs(node.right, row + 1,col + 1);
     }
+    */
 }
