@@ -12,11 +12,8 @@ public class Solution_1405 {
 
     public String longestDiverseString(int a, int b, int c) {
         PriorityQueue<unit> queue = new PriorityQueue<>((i, j) -> j.cnt - i.cnt);
-
-        Map<Character, Integer> curr = new HashMap<>();
-        curr.put('a', 0);
-        curr.put('b', 0);
-        curr.put('c', 0);
+        char currChar = 'z';
+        int currFreq = 0;
 
         StringBuilder sb = new StringBuilder();
 
@@ -42,10 +39,15 @@ public class Solution_1405 {
                 break;
             }
             else {
-                if (curr.get(max.c) != 2) {
+                if (currChar != max.c || currFreq < 2) {
                     sb.append(max.c);
-                    curr.put(max.c, curr.get(max.c) + 1);
-                    cleanExcept(curr, max.c);
+                    if (currChar != max.c) {
+                        currChar = max.c;
+                        currFreq = 1;
+                    }
+                    else {
+                        currFreq += 1;
+                    }
                     max.cnt--;
                     queue.offer(max);
                 }
@@ -56,8 +58,8 @@ public class Solution_1405 {
                     }
                     else {
                         sb.append(second.c);
-                        curr.put(second.c, 1);
-                        cleanExcept(curr, second.c);
+                        currChar = second.c;
+                        currFreq = 1;
                         second.cnt--;
                         queue.offer(second);
                         queue.offer(max);
@@ -66,13 +68,5 @@ public class Solution_1405 {
             }
         }
         return sb.toString();
-    }
-
-    private void cleanExcept(Map<Character, Integer> curr, char c) {
-        for (char key : curr.keySet()) {
-            if (key != c) {
-                curr.put(key, 0);
-            }
-        }
     }
 }

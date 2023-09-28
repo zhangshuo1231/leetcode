@@ -1,14 +1,14 @@
 import amazon.LongestSquare;
 import amazon.RectangleAreas;
-import answers.Solution_1405;
+import answers.*;
 import model.TreeNode;
 
 import java.util.Arrays;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_1405 solution = new Solution_1405();
-        System.out.println(solution.longestDiverseString(1, 0, 3));
+        Solution_2423 solution = new Solution_2423();
+        System.out.println(solution.equalFrequency("bac"));
     }
 
     private static void printBit(int number) {
