@@ -7,8 +7,11 @@ import java.util.Arrays;
 
 public class LeetCode {
     public static void main(String[] args) {
-        Solution_2423 solution = new Solution_2423();
-        System.out.println(solution.equalFrequency("bac"));
+        Solution_901 solution = new Solution_901();
+        solution.next(1);
+        solution.next(2);
+        solution.next(1);
+        System.out.println(solution.next(1));
     }
 
     private static void printBit(int number) {
